@@ -1,6 +1,5 @@
 import rdflib
-from rdflib import Graph, Literal, RDF, URIRef
-from rdflib.plugins.sparql.evaluate import evalPart, evalBGP
+# from rdflib.plugins.sparql.evaluate import evalPart, evalBGP
 from rdflib.plugins.sparql.evalutils import _eval
 from rdflib import Graph, Literal, RDF, URIRef
 from rdflib.namespace import Namespace
@@ -103,10 +102,12 @@ def custom_concat(query_results, ctx, part, eval_part):
     argument2 = str(_eval(part.expr.expr[1], eval_part.forget(ctx, _except=part.expr._vars)))
     evaluation = []
     scores = []
-
     concat_string = argument1 + argument2
+    reverse_string = argument2 + argument1
     evaluation.append(concat_string)
+    evaluation.append(reverse_string)
     scores.append(len(concat_string))
+    scores.append(len(reverse_string))
     # Append the results for our custom function
     for i, result in enumerate(evaluation):
         query_results.append(eval_part.merge({
