@@ -26,6 +26,8 @@ SELECT ?drugOrDisease ?predictedForTreatment ?predictedForTreatmentScore WHERE {
 
 Use this federated query to retrieve predicted treatments for a drug or disease (OMIM or DRUGBANK) from any other SPARQL endpoint supporting federated queries.
 
+**From another SPARQL endpoint**
+
 ```SPARQL
 PREFIX openpredict: <https://w3id.org/um/openpredict/>
 SELECT * WHERE

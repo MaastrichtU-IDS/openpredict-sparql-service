@@ -1,10 +1,11 @@
 from rdflib_endpoint import SparqlEndpoint
 
 import rdflib
-# from rdflib.plugins.sparql.evaluate import evalPart, evalBGP
 from rdflib.plugins.sparql.evalutils import _eval
 from rdflib import Graph, Literal, RDF, URIRef
+from rdflib.graph import ConjunctiveGraph
 # from rdflib.namespace import Namespace
+# from rdflib.plugins.sparql.evaluate import evalPart, evalBGP
 
 from openpredict.openpredict_model import query_omim_drugbank_classifier
 from openpredict.openpredict_utils import init_openpredict_dir
@@ -88,7 +89,9 @@ SELECT ?drugOrDisease ?predictedForTreatment ?predictedForTreatmentScore WHERE {
 
 init_openpredict_dir()
 # Start the SPARQL endpoint based on a RDFLib Graph
-g = Graph()
+g = ConjunctiveGraph(
+    identifier=URIRef('https://w3id.org/um/openpredict/graph/default'), 
+)
 app = SparqlEndpoint(
     graph=g,
     functions={
